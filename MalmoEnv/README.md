@@ -1,18 +1,18 @@
-# MalmoEnv (Prototype) #
+# MalmoEnv #
 
-MalmoEnv is an OpenAI "gym" like Python Environment for Malmo/Minecraft, directly implemented Python to Java Minecraft.
+MalmoEnv is an OpenAI "gym" Python Environment for Malmo/Minecraft, directly implemented Python to Java Minecraft.
 
-A python "gym env" is created and used to run an agent in a Malmo mission. Each env has a remote Minecraft instance
+A Python "gym env" can be created and used to run an agent in a Malmo mission. Each such env has a remote Minecraft instance
 associated to it (by DNS name or IP and Port). For multi-agent missions, the first agent's (role 0) Minecraft 
 client instance is used as a coordinator to allow all agents to rendezvous on mission starts (i.e. on env resets).
 
-As it's python only, you just need this one package, its direct dependencies and (Java) Minecraft!
+As it's pure Python, you just need this one package, its direct dependencies and (Java) Minecraft! Example missions, including some from the 2018 MarLo competition can be found in the "missions" directory.
 
 ## Examples of use: ##
 
 Install dependencies:
 
-Java8 JDK, python3, git
+Java8 JDK ([AdoptOpenJDK](https://adoptopenjdk.net/)), python3, git
 
 `pip3 install gym lxml numpy pillow`
 
@@ -23,7 +23,7 @@ To prepare Minecraft (after cloning this repository with
 
 `(echo -n "malmomod.version=" && cat ../VERSION) > ./src/main/resources/version.properties` 
 
-Running a single agent example mission (run each command in different cmd prompt/shells):
+Running a single agent example mission (run each command in different cmd prompt/shells - use launchClient.bat on Windows):
 
 `./launchClient.sh -port 9000 -env` or (On Windows) `launchClient.bat -port 9000 -env`
 
@@ -44,11 +44,13 @@ In the two agent case, running each agent in it's own shell, the run script (for
 
 `python3 run.py --mission missions/mobchase_two_agents.xml --port 9000 --port2 9001 --role 1  --experimentUniqueId "test1"`
 
-## Running multi-threaded multi-agent examples: ##
+## Running multi-agent examples using multiple Python threads: ##
 
 `python3 runmultiagent.py --mission missions/mobchase_two_agents.xml`
 
 ## Installing with pip ##
+
+MalmoEnv is available as a pip wheel.
 
 If you install with `pip3 install malmoenv` then you can download the Minecraft mod 
 (assuming you have git available from the command line) with: 
